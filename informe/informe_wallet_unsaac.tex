@@ -126,7 +126,7 @@
         \textbf{Código:} 174449\\
         \textbf{Modalidad:} Trabajo Individual · Cuatro Retos Calificados (20 pts)\\
         \textbf{Fecha de Entrega:} 16 de noviembre de 2026\\
-        \textbf{Repositorio:} \url{https://github.com/milith0kun/desarrollo-de-software-2}
+        \textbf{Repositorio:} \url{https://github.com/milith0kun/wallet-unsaac}
     \end{minipage}
     
     \vfill
@@ -154,7 +154,7 @@ Producto evaluado & Wallet UNSAAC: Esqueleto modular y Cuatro Retos Individuales
 Estudiante & Edmil Jampier Saire Bustamante \\
 Código de estudiante & 174449 \\
 Docente conductor & Mtro. Ing. Yover Collantes Valer \\
-Repositorio institucional & \url{https://github.com/milith0kun/desarrollo-de-software-2} \\
+Repositorio institucional & \url{https://github.com/milith0kun/wallet-unsaac} \\
 \bottomrule
 \end{tabular}
 \caption{Ficha técnica de entrega del estudiante.}
@@ -165,7 +165,7 @@ Repositorio institucional & \url{https://github.com/milith0kun/desarrollo-de-sof
 % ============================================================================
 \section{Resumen del trabajo}
 
-En el presente informe técnico se documenta el desarrollo, verificación empírica y arquitectura modular de la aplicación móvil \textbf{Wallet UNSAAC}, desarrollada sobre el framework Flutter y el lenguaje Dart. La solución implementa estrictamente una arquitectura en capas inspirada en Clean Architecture (separación en \textit{domain}, \textit{data} y \textit{presentation}), desacoplando por completo las reglas de negocio de la infraestructura y del framework visual. Se resolvieron en su totalidad los cuatro retos individuales propuestos por la cátedra: (1) persistencia asíncrona del modo de tema mediante \texttt{SharedPreferences} con carga previa a \texttt{runApp} para mitigar parpadeos de luminancia; (2) encapsulación de la privacidad visual de montos y transacciones a través de un \texttt{PrivacyCubit} que reemplaza las cifras por máscaras sin mutar los datos de dominio; (3) modelado estricto del ciclo de vida del saldo mediante una clase sellada \texttt{BalanceState} (\texttt{Initial}, \texttt{Loading}, \texttt{Success}, \texttt{Failure}) y verificación de \texttt{isClosed}; y (4) personalización dinámica del color semilla institucional Material 3 con actualización granular de UI vía \texttt{BlocSelector}. La robustez fue certificada mediante 14 pruebas automatizadas con 100\% de aprobación y generación reproducible de evidencias en alta resolución.
+En el presente informe técnico se documenta el desarrollo, verificación empírica y arquitectura modular de la aplicación móvil \textbf{Wallet UNSAAC}, desarrollada sobre el framework Flutter y el lenguaje Dart. La solución implementa estrictamente una arquitectura en capas inspirada en Clean Architecture (separación en \textit{domain}, \textit{data} y \textit{presentation}), desacoplando por completo las reglas de negocio de la infraestructura y del framework visual. Se resolvieron en su totalidad los cuatro retos individuales propuestos por la cátedra: (1) persistencia asíncrona del modo de tema mediante \texttt{SharedPreferences} con carga previa a \texttt{runApp} para mitigar parpadeos de luminancia; (2) encapsulación de la privacidad visual de montos y transacciones a través de un \texttt{PrivacyCubit} que reemplaza las cifras por máscaras sin mutar los datos de dominio; (3) modelado estricto del ciclo de vida del saldo mediante una clase sellada \texttt{BalanceState} (\texttt{Initial}, \texttt{Loading}, \texttt{Success}, \texttt{Failure}) y verificación de \texttt{isClosed}; y (4) personalización dinámica del color semilla institucional Material 3 con actualización granular de UI vía \texttt{BlocSelector}. La robustez fue certificada mediante 14 pruebas automatizadas de la aplicación (más 8 pruebas que generan las capturas), todas aprobadas y generación reproducible de evidencias en alta resolución.
 
 \noindent\textbf{Palabras clave:} BLoC/Cubit; Persistencia Asíncrona; Clean Architecture; Material 3; State Machine.
 
@@ -184,8 +184,8 @@ En el presente informe técnico se documenta el desarrollo, verificación empír
 Flutter SDK & 3.41.4 (channel stable) & \texttt{flutter --version} \\
 Dart SDK & 3.11.1 & \texttt{dart --version} \\
 Sistema Operativo & Windows 11 Pro 64-bit & PowerShell \texttt{[Environment]::OSVersion} \\
-Compilador LaTeX & MiKTeX pdflatex 24.1 & \texttt{pdflatex --version} \\
-OpenJDK & 17.0.10 (Temurin) & \texttt{java -version} \\
+Compilador LaTeX & MiKTeX-XeTeX 4.16 (MiKTeX 25.12) & 	exttt{xelatex --version} \
+OpenJDK & 21.0.11 LTS & \texttt{java -version} \\
 \bottomrule
 \end{tabular}
 \caption{Matriz de herramientas del entorno de compilación.}
@@ -198,9 +198,9 @@ OpenJDK & 17.0.10 (Temurin) & \texttt{java -version} \\
 \toprule
 \textbf{Comando} & \textbf{Resultado} & \textbf{Evidencia} \\
 \midrule
-\texttt{flutter pub get} & OK & Dependencias resueltas en 0.8s \\
+\texttt{flutter pub get} & OK & Dependencias resueltas sin errores \\
 \texttt{flutter analyze} & No issues found! & 0 errores, 0 advertencias, 0 lints \\
-\texttt{flutter test} & All tests passed! & 14/14 pruebas unitarias y de widgets OK \\
+\texttt{flutter test} & All tests passed! & 22/22 pruebas OK (14 de la aplicación y 8 de generación de capturas) \\
 \texttt{flutter build apk --release} & OK & Binario release generado en \texttt{wallet\_unsaac.apk} \\
 \bottomrule
 \end{tabular}
@@ -538,14 +538,14 @@ Declaro que este informe y el código fuente entregado son de mi autoría intele
 \toprule
 \textbf{Herramienta} & \textbf{Uso} & \textbf{Verificación realizada} \\
 \midrule
-Asistente Antigravity / Gemini & Generación de scripts y capturas & Inspección visual y paso de tests \\
-Documentación oficial Flutter & Consulta de Material 3 y BLoC & Contraste con SDK 3.41.4 \\
+Claude Code (Anthropic) & Corrección del test de capturas, limpieza de 	exttt{flutter analyze}, compilación del APK y revisión del informe & Ejecución propia de 	exttt{flutter analyze}, 	exttt{flutter test} e inspección visual de las capturas \\
+Documentación oficial Flutter & Consulta de Material 3 y BLoC & Contraste con SDK 3.41.4 y pruebas \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \vspace{1.0cm}
-\noindent\textbf{Firma del estudiante:} \rule{7cm}{0.4pt} \qquad \textbf{Fecha:} 11 / 11 / 2026
+\noindent\textbf{Firma del estudiante:} \rule{7cm}{0.4pt} \qquad \textbf{Fecha:} ule{3cm}{0.4pt}
 
 % ============================================================================
 % 10. REFERENCIAS
