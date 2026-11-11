@@ -514,6 +514,21 @@ El color seleccionado persiste en disco vía SharedPreferences. & $\boxtimes$ & 
 \end{table}
 
 % ============================================================================
+% EXTENSIÓN — INTEGRACIÓN CON SUPABASE
+% ============================================================================
+\section{Extensión: integración con Supabase}
+
+Además de los cuatro retos, la capa de datos se extendió para leer los movimientos desde una instancia propia de Supabase (autoalojada), sin modificar cubits ni interfaz. Solo se añadió una implementación de \texttt{WalletRepository}:
+
+\begin{itemize}[itemsep=1pt]
+    \item \texttt{SupabaseWalletRepository} lee la tabla \texttt{public.wallet\_movimientos} y la convierte en entidades \texttt{Movement}.
+    \item Las credenciales no están en el código: se inyectan al compilar con \texttt{--dart-define-from-file=env.json}, archivo excluido del repositorio. Sin credenciales, la aplicación usa \texttt{InMemoryWalletRepository}, por lo que las pruebas no dependen de la red.
+    \item El esquema \texttt{supabase/wallet\_schema.sql} crea la tabla con prefijo \texttt{wallet\_}, para compartir el servidor con otros proyectos sin colisiones, y activa \textit{Row Level Security}: la clave pública (\texttt{anon}) solo puede leer; un intento de inserción fue rechazado por la política.
+\end{itemize}
+
+\textbf{Limitación conocida:} mientras el servidor no tenga certificado TLS válido, la conexión usa HTTP y se habilitó \texttt{usesCleartextTraffic} en Android. Es aceptable para esta demostración, pero debe retirarse al activar HTTPS. Tampoco hay autenticación de usuarios: todos los dispositivos ven los mismos movimientos de demostración.
+
+% ============================================================================
 % 8. CONCLUSIONES Y APRENDIZAJES
 % ============================================================================
 \section{Conclusiones y aprendizajes}
