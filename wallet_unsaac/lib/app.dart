@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet_unsaac/core/config/firebase_status.dart';
+import 'package:wallet_unsaac/core/config/backend_status.dart';
 import 'package:wallet_unsaac/core/theme/app_theme.dart';
 import 'package:wallet_unsaac/core/theme/theme_cubit.dart';
 import 'package:wallet_unsaac/core/theme/theme_preferences.dart';
@@ -17,14 +17,14 @@ class WalletApp extends StatelessWidget {
     required this.preferences,
     required this.initialMode,
     required this.initialSeed,
-    required this.firebaseStatus,
+    required this.backendStatus,
     this.walletRepository,
   });
 
   final ThemePreferences preferences;
   final ThemeMode initialMode;
   final Color initialSeed;
-  final FirebaseStatus firebaseStatus;
+  final BackendStatus backendStatus;
   final WalletRepository? walletRepository;
 
   @override
@@ -57,7 +57,7 @@ class WalletApp extends StatelessWidget {
               themeMode: themeState.mode,
               theme: AppTheme.light(themeState.seedColor),
               darkTheme: AppTheme.dark(themeState.seedColor),
-              home: WalletHomePage(firebaseStatus: firebaseStatus),
+              home: WalletHomePage(backendStatus: backendStatus),
             );
           },
         ),

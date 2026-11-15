@@ -214,10 +214,10 @@ El proyecto se organizó bajo el patrón de arquitectura limpia por característ
 wallet_unsaac/
 ├── lib/
 │   ├── app.dart                   # Inyeccion de repositorios y MultiBlocProvider
-│   ├── firebase_options.dart      # Credenciales desacopladas
+│   │   (credenciales de Supabase por --dart-define, sin archivos en el repo)
 │   ├── main.dart                  # Inicializacion asincrona antes de runApp
 │   ├── core/
-│   │   ├── config/                # Bootstrap de Firebase y estado de conexion
+│   │   ├── config/                # SupabaseConfig y estado de conexion (BackendStatus)
 │   │   ├── theme/                 # AppTheme, ThemeCubit, ThemePreferences, ThemeState
 │   │   └── utils/                 # MoneyFormat y parseadores monetarios
 │   └── features/wallet/

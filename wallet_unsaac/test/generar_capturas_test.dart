@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wallet_unsaac/core/config/firebase_status.dart';
+import 'package:wallet_unsaac/core/config/backend_status.dart';
 import 'package:wallet_unsaac/core/theme/app_theme.dart';
 import 'package:wallet_unsaac/core/theme/theme_cubit.dart';
 import 'package:wallet_unsaac/features/wallet/data/repositories/in_memory_wallet_repository.dart';
@@ -113,7 +113,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );
@@ -134,7 +134,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );
@@ -155,7 +155,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );
@@ -177,7 +177,7 @@ void main() {
             BlocProvider.value(value: privacyCubit),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );
@@ -196,7 +196,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(const BalanceLoading())),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );
@@ -215,7 +215,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(const BalanceFailure('Error de conexion con el servidor.'))),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );
@@ -237,7 +237,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );
@@ -258,7 +258,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
         ),
       ),
     );

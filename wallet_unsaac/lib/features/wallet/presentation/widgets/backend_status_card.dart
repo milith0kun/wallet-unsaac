@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wallet_unsaac/core/config/firebase_status.dart';
+import 'package:wallet_unsaac/core/config/backend_status.dart';
 
-class FirebaseStatusCard extends StatelessWidget {
-  const FirebaseStatusCard({super.key, required this.status});
-  final FirebaseStatus status;
+class BackendStatusCard extends StatelessWidget {
+  const BackendStatusCard({super.key, required this.status});
+  final BackendStatus status;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,9 @@ class FirebaseStatusCard extends StatelessWidget {
         ? scheme.primaryContainer.withValues(alpha: 0.45)
         : scheme.surfaceContainerHighest;
     final icon = switch (status.state) {
-      FirebaseState.ready => Icons.cloud_done_outlined,
-      FirebaseState.notConfigured => Icons.cloud_off_outlined,
-      FirebaseState.failed => Icons.error_outline_rounded,
+      BackendState.ready => Icons.cloud_done_outlined,
+      BackendState.notConfigured => Icons.cloud_off_outlined,
+      BackendState.failed => Icons.error_outline_rounded,
     };
     return Card(
       color: background,
@@ -29,7 +29,7 @@ class FirebaseStatusCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Firebase: ${status.label}',
+                  Text('Supabase: ${status.label}',
                       style: const TextStyle(fontWeight: FontWeight.w600)),
                   const SizedBox(height: 4),
                   Text(status.hint,

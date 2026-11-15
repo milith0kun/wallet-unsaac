@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet_unsaac/core/config/firebase_status.dart';
+import 'package:wallet_unsaac/core/config/backend_status.dart';
 import 'package:wallet_unsaac/core/theme/theme_cubit.dart';
 import 'package:wallet_unsaac/core/theme/theme_state.dart';
 import 'package:wallet_unsaac/features/wallet/domain/entities/wallet_summary.dart';
@@ -10,12 +10,12 @@ import 'package:wallet_unsaac/features/wallet/presentation/cubits/privacy_cubit.
 import 'package:wallet_unsaac/features/wallet/presentation/cubits/privacy_state.dart';
 import 'package:wallet_unsaac/features/wallet/presentation/widgets/balance_card.dart';
 import 'package:wallet_unsaac/features/wallet/presentation/widgets/color_seed_selector.dart';
-import 'package:wallet_unsaac/features/wallet/presentation/widgets/firebase_status_card.dart';
+import 'package:wallet_unsaac/features/wallet/presentation/widgets/backend_status_card.dart';
 import 'package:wallet_unsaac/features/wallet/presentation/widgets/movement_tile.dart';
 
 class WalletHomePage extends StatefulWidget {
-  const WalletHomePage({super.key, required this.firebaseStatus});
-  final FirebaseStatus firebaseStatus;
+  const WalletHomePage({super.key, required this.backendStatus});
+  final BackendStatus backendStatus;
 
   @override
   State<WalletHomePage> createState() => _WalletHomePageState();
@@ -119,7 +119,7 @@ class _WalletHomePageState extends State<WalletHomePage> {
                 const SizedBox(height: 10),
               ],
             const SizedBox(height: 12),
-            FirebaseStatusCard(status: widget.firebaseStatus),
+            BackendStatusCard(status: widget.backendStatus),
             const SizedBox(height: 16),
             Center(child: Text('Datos de demostración · Wallet UNSAAC 1.0.0',
                 style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant))),

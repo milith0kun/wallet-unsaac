@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wallet_unsaac/core/config/firebase_status.dart';
+import 'package:wallet_unsaac/core/config/backend_status.dart';
 import 'package:wallet_unsaac/core/theme/theme_cubit.dart';
 import 'package:wallet_unsaac/features/wallet/domain/entities/movement.dart';
 import 'package:wallet_unsaac/features/wallet/domain/entities/wallet_summary.dart';
@@ -38,7 +38,7 @@ void main() {
         BlocProvider(create: (_) => BalanceCubit(repo)),
       ],
       child: const MaterialApp(
-        home: WalletHomePage(firebaseStatus: FirebaseStatus.notConfigured()),
+        home: WalletHomePage(backendStatus: BackendStatus.notConfigured()),
       ),
     );
   }
