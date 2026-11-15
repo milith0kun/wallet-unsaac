@@ -165,7 +165,7 @@ Repositorio institucional & \url{https://github.com/milith0kun/wallet-unsaac} \\
 % ============================================================================
 \section{Resumen del trabajo}
 
-En el presente informe técnico se documenta el desarrollo, verificación empírica y arquitectura modular de la aplicación móvil \textbf{Wallet UNSAAC}, desarrollada sobre el framework Flutter y el lenguaje Dart. La solución implementa estrictamente una arquitectura en capas inspirada en Clean Architecture (separación en \textit{domain}, \textit{data} y \textit{presentation}), desacoplando por completo las reglas de negocio de la infraestructura y del framework visual. Se resolvieron en su totalidad los cuatro retos individuales propuestos por la cátedra: (1) persistencia asíncrona del modo de tema mediante \texttt{SharedPreferences} con carga previa a \texttt{runApp} para mitigar parpadeos de luminancia; (2) encapsulación de la privacidad visual de montos y transacciones a través de un \texttt{PrivacyCubit} que reemplaza las cifras por máscaras sin mutar los datos de dominio; (3) modelado estricto del ciclo de vida del saldo mediante una clase sellada \texttt{BalanceState} (\texttt{Initial}, \texttt{Loading}, \texttt{Success}, \texttt{Failure}) y verificación de \texttt{isClosed}; y (4) personalización dinámica del color semilla institucional Material 3 con actualización granular de UI vía \texttt{BlocSelector}. La robustez fue certificada mediante 14 pruebas automatizadas de la aplicación (más 8 que generan las capturas y 3 de integración contra Supabase real), todas aprobadas y generación reproducible de evidencias en alta resolución.
+En el presente informe técnico se documenta el desarrollo, verificación empírica y arquitectura modular de la aplicación móvil \textbf{Wallet UNSAAC}, desarrollada sobre el framework Flutter y el lenguaje Dart. La solución implementa estrictamente una arquitectura en capas inspirada en Clean Architecture (separación en \textit{domain}, \textit{data} y \textit{presentation}), desacoplando por completo las reglas de negocio de la infraestructura y del framework visual. Se resolvieron en su totalidad los cuatro retos individuales propuestos por la cátedra: (1) persistencia asíncrona del modo de tema mediante \texttt{SharedPreferences} con carga previa a \texttt{runApp} para mitigar parpadeos de luminancia; (2) encapsulación de la privacidad visual de montos y transacciones a través de un \texttt{PrivacyCubit} que reemplaza las cifras por máscaras sin mutar los datos de dominio; (3) modelado estricto del ciclo de vida del saldo mediante una clase sellada \texttt{BalanceState} (\texttt{Initial}, \texttt{Loading}, \texttt{Success}, \texttt{Failure}) y verificación de \texttt{isClosed}; y (4) personalización dinámica del color semilla institucional Material 3 con actualización granular de UI vía \texttt{BlocSelector}. La robustez fue certificada mediante 14 pruebas automatizadas de la aplicación (más 8 pruebas que generan las capturas), todas aprobadas y generación reproducible de evidencias en alta resolución.
 
 \noindent\textbf{Palabras clave:} BLoC/Cubit; Persistencia Asíncrona; Clean Architecture; Material 3; State Machine.
 
@@ -200,7 +200,7 @@ OpenJDK & 21.0.11 LTS & \texttt{java -version} \\
 \midrule
 \texttt{flutter pub get} & OK & Dependencias resueltas sin errores \\
 \texttt{flutter analyze} & No issues found! & 0 errores, 0 advertencias, 0 lints \\
-\texttt{flutter test} & All tests passed! & 25/25 pruebas OK (14 de la aplicación, 8 de generación de capturas y 3 de integración con Supabase) \\
+\texttt{flutter test} & All tests passed! & 22/22 pruebas OK (14 de la aplicación y 8 de generación de capturas) \\
 \texttt{flutter build apk --release} & OK & Binario release generado en \texttt{wallet\_unsaac.apk} \\
 \bottomrule
 \end{tabular}
@@ -214,10 +214,10 @@ El proyecto se organizó bajo el patrón de arquitectura limpia por característ
 wallet_unsaac/
 ├── lib/
 │   ├── app.dart                   # Inyeccion de repositorios y MultiBlocProvider
-│   │   (credenciales de Supabase por --dart-define, sin archivos en el repo)
+│   │   (google-services.json y firebase_options.dart generados con flutterfire)
 │   ├── main.dart                  # Inicializacion asincrona antes de runApp
 │   ├── core/
-│   │   ├── config/                # SupabaseConfig y estado de conexion (BackendStatus)
+│   │   ├── config/                # Bootstrap de Firebase y estado de conexion (BackendStatus)
 │   │   ├── theme/                 # AppTheme, ThemeCubit, ThemePreferences, ThemeState
 │   │   └── utils/                 # MoneyFormat y parseadores monetarios
 │   └── features/wallet/
@@ -512,21 +512,6 @@ El color seleccionado persiste en disco vía SharedPreferences. & $\boxtimes$ & 
 \bottomrule
 \end{tabular}
 \end{table}
-
-% ============================================================================
-% EXTENSIÓN — INTEGRACIÓN CON SUPABASE
-% ============================================================================
-\section{Extensión: integración con Supabase}
-
-Además de los cuatro retos, la capa de datos se extendió para leer los movimientos desde una instancia propia de Supabase (autoalojada), sin modificar cubits ni interfaz. Solo se añadió una implementación de \texttt{WalletRepository}:
-
-\begin{itemize}[itemsep=1pt]
-    \item \texttt{SupabaseWalletRepository} lee la tabla \texttt{public.wallet\_movimientos} y la convierte en entidades \texttt{Movement}.
-    \item Las credenciales no están en el código: se inyectan al compilar con \texttt{--dart-define-from-file=env.json}, archivo excluido del repositorio. Sin credenciales, la aplicación usa \texttt{InMemoryWalletRepository}, por lo que las pruebas no dependen de la red.
-    \item El esquema \texttt{supabase/wallet\_schema.sql} crea la tabla con prefijo \texttt{wallet\_}, para compartir el servidor con otros proyectos sin colisiones, y activa \textit{Row Level Security}: la clave pública (\texttt{anon}) solo puede leer; un intento de inserción fue rechazado por la política.
-\end{itemize}
-
-\textbf{Limitación conocida:} mientras el servidor no tenga certificado TLS válido, la conexión usa HTTP y se habilitó \texttt{usesCleartextTraffic} en Android. Es aceptable para esta demostración, pero debe retirarse al activar HTTPS. Tampoco hay autenticación de usuarios: todos los dispositivos ven los mismos movimientos de demostración.
 
 % ============================================================================
 % 8. CONCLUSIONES Y APRENDIZAJES

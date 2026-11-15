@@ -113,7 +113,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );
@@ -134,7 +134,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );
@@ -155,7 +155,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );
@@ -177,7 +177,7 @@ void main() {
             BlocProvider.value(value: privacyCubit),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );
@@ -196,7 +196,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(const BalanceLoading())),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );
@@ -215,7 +215,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(const BalanceFailure('Error de conexion con el servidor.'))),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );
@@ -237,7 +237,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );
@@ -258,7 +258,7 @@ void main() {
             BlocProvider(create: (_) => PrivacyCubit()),
             BlocProvider<BalanceCubit>(create: (_) => _StaticBalanceCubit(BalanceSuccess(summary))),
           ],
-          child: const WalletHomePage(backendStatus: BackendStatus.notConfigured()),
+          child: const WalletHomePage(backendStatus: BackendStatus.ready()),
         ),
       ),
     );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "303277103030",
+    "project_id": "unsaac-wallet",
+    "storage_bucket": "unsaac-wallet.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303277103030:android:e316c48cff2e64ef4f5317",
+        "android_client_info": {
+          "package_name": "pe.edu.unsaac.wallet_unsaac"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrN2L5TGj-NkVjjDJjCvXmIMKo7UYI9Rk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

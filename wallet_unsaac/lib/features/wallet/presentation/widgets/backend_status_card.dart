@@ -29,7 +29,7 @@ class BackendStatusCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Supabase: ${status.label}',
+                  Text('Firebase: ${status.label}',
                       style: const TextStyle(fontWeight: FontWeight.w600)),
                   const SizedBox(height: 4),
                   Text(status.hint,

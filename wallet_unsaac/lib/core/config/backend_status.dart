@@ -1,6 +1,6 @@
 enum BackendState { ready, notConfigured, failed }
 
-/// Estado de la conexión con el backend (Supabase).
+/// Estado de la conexión con el backend (Firebase).
 class BackendStatus {
   const BackendStatus._(this.state, [this.detail]);
   const BackendStatus.ready() : this._(BackendState.ready);
@@ -16,14 +16,14 @@ class BackendStatus {
   String get label => switch (state) {
         BackendState.ready => 'conectado',
         BackendState.notConfigured => 'no configurado (modo local)',
-        BackendState.failed => 'error de conexión',
+        BackendState.failed => 'error de inicialización',
       };
 
   String get hint => switch (state) {
         BackendState.ready =>
-          'Los movimientos se leen de la tabla wallet_movimientos.',
+          'firebase_core se inicializó correctamente antes de runApp.',
         BackendState.notConfigured =>
-          'Compila con --dart-define-from-file=env.json para conectar. '
+          'Ejecuta flutterfire configure y vuelve a compilar. '
               'Mientras tanto, la app usa datos de demostración.',
         BackendState.failed =>
           detail ?? 'Revisa la consola de Flutter para conocer el detalle.',
